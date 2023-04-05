@@ -27,7 +27,6 @@ function App(){
     async function fetchData() {
 
 
-
       try{
         const params = {
           id: userId
