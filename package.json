@@ -37,7 +37,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "TZ=America/Los_Angeles node server/server.js",
+    "start": "node server/server.js",
     "server": "nodemon server/server.js",
     "client": "npm start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1",
