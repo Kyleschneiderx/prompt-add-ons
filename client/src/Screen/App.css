@@ -1,0 +1,142 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Header styles */
+.headerL {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.headerL h2 {
+  font-size: 24px;
+  margin: 0;
+  color: #333;
+}
+
+.headerL h3 {
+  font-size: 18px;
+  margin: 0;
+  color: #999;
+}
+
+/* Quick Pay section styles */
+.quick-pay-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.quick-pay-header h4 {
+  font-size: 20px;
+  margin: 0;
+  color: #333;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.button {
+  background-color: #3b9c9c;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  font-size: 18px;
+}
+
+.button:hover {
+  background-color: #316b6b;
+  cursor: pointer; /* add pointer cursor on hover */
+}
+
+.long-button {
+  width: 70%;
+  height: 90px;
+  border-radius: 10px;
+  font-size: 18px;
+  background-color: #3b9c9c;
+  color: white;
+  border: none;
+}
+
+.long-button:hover {
+  background-color: #316b6b;
+  cursor: pointer;
+}
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+/* Form styles */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-input {
+  margin: 1rem 0;
+  padding: 0.5rem;
+  font-size: 1.2rem;
+  border: 2px solid #E6E6E6;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+}
+
+.form-submit-button {
+  background-color: #00BFFF;
+  color: #FFFFFF;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin: 10px;
+}
+
+.form-submit-button:hover {
+  background-color: #0080FF;
+}
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.loading-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
