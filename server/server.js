@@ -107,7 +107,6 @@ app.get("/", function (req, res) {
 app.route('/patient')
 .post(async (req,res) =>{
 
-    console.log(req.body)
 
     const amountInDollars = req.body.amount;
     const amountInCents = Math.round(amountInDollars * 100);
@@ -116,7 +115,8 @@ app.route('/patient')
     try{
         const cust = await createCustomer(req.body.name, req.body.id)
         const pay = await createPaymentLink(cust, amountInCents, 'usd')
-        console.log(pay.url)
+        // console.log(pay.id)
+        // console.log(pay.url)
         res.status(200).send(pay.url)
 
         await doc.useServiceAccountAuth({
@@ -129,6 +129,9 @@ app.route('/patient')
         await firstSheet.loadCells();
         const cell = await firstSheet.getCell(req.body.index+1, 4)
         cell.value = "Yes";
+
+        const payId = await firstSheet.getCell(req.body.index+1, 6)
+        payId.value = pay.id
 
 // Save the changes to the sheet
         await firstSheet.saveUpdatedCells();
@@ -168,8 +171,6 @@ app.route('/patient')
 .get(async (req,res)=>{
 
     // console.log(req.query)
-
-
 
     try{
 
@@ -212,11 +213,11 @@ app.route('/patient')
 
 
 app.route('/text')
-.get(api ,async (req, res)=>{
+.get(api, async (req, res)=>{
 
+    console.log("running")
 
     try{
-
 
         await doc.useServiceAccountAuth({
             client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
