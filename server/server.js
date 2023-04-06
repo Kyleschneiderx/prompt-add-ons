@@ -210,9 +210,9 @@ app.route('/patient')
 
 
 app.route('/text')
-.get( async (req, res)=>{
+.post( async (req, res)=>{
 
-    console.log(req)
+    console.log(req.body)
 
     try{
 
