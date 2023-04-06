@@ -212,7 +212,7 @@ app.route('/patient')
 
 
 app.route('/text')
-.get( api, async (req, res)=>{
+.get(api ,async (req, res)=>{
 
 
     try{
