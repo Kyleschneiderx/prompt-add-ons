@@ -24,8 +24,7 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 
 const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID);
 
-// cron.schedule('30 12,18 * * *', async () => {
-    cron.schedule('5 15 * * *', async () => {
+cron.schedule('30 12,18 * * *', async () => {
     console.log('Running the tasks at 12:30pm and 6:30pm every day');
     // add your task code here
     try{
