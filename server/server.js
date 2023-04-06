@@ -214,80 +214,16 @@ app.route('/patient')
 
 })
 
+app.use(express.static('client/build'));
 
-app.route('/text')
-.get( async (req, res)=>{
-
-
-
-
-    try{
-
-
+if(process.env.NODE_ENV === 'production'){
+    const path = require('path');
+    app.get('/*',(req,res)=>{
+        res.sendFile(path.resolve(__dirname,'../client','build','index.html'))
+    })
+}
 
 
-        await doc.useServiceAccountAuth({
-            client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-            private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
-        });
-
-
-        await doc.loadInfo(); // loads document properties and worksheets
-
-        const firstSheet = await doc.sheetsByIndex[0]
-
-        let chekc=[]
-        const col = await firstSheet.getRows()
-        let i = 0;
-        while(i < col.length){
-            if(col[i]["Texted"] !== "Yes"){
-
-                chekc.push({index: i, id: col[i]["Patient Account Number"], name: col[i]["Patient Name"], owed: col[i]["Total Outstanding"], number: col[i]["phoneNumber"]})
-                
-            }
-            i++
-
-        }
-
-        const selectedNumbers = chekc.slice(0, 5); // Send message to first 5 numbers in the list
-
-        selectedNumbers.forEach(number => {
-            console.log(number.id)
-            const link = encrypt(number.id, process.env.SECRET)
-            console.log(link)
-            client
-            .messages
-            .create({
-                body: `Hi ${number.name.split(' ')[0]},\nThis is friendly message from Lake City PT letting you know you have an balance. If you'd like to make a payment please use the link below.\n https://lakecitypt.com/${link}`,
-                from: '+12083142483',
-                to: number.number})
-            .then(message => {
-                console.log(message.sid)
-                console.log(`Message sent to ${message.to}`)
-            })
-            .catch(error => console.error(`Error sending message to ${number}: ${error.message}`));
-        });
-    }
-    catch(err){
-        console.log(err)
-    }
-
-
-    // for(let i=0; i < recips.length; i++){
-    //     client
-    //     .messages
-    //     .create({
-    //         body: `Hi an important message was sent in the Webex Provider Group please check for reference.`,
-    //         from: '+18557551240',
-    //         to: recips[i]})
-    //     .then(message => {
-    //         console.log(message.sid)
-    //         res.status(200).send(JSON.stringify(message.sid))
-    //     });
-
-    // }
-
-})
 
 
 
