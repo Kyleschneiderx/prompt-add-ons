@@ -14,7 +14,7 @@ const {
 
 } = require('./helper/crypto.js')
 
-const {api} = require('../middleware/apikey')
+const {api} = require('./middleware/apikey')
 
 const cron = require('node-cron');
 
