@@ -131,7 +131,7 @@ app.route('/patient')
         cell.value = "Yes";
 
         const payId = await firstSheet.getCell(req.body.index+1, 6)
-        payId.value = pay.id
+        payId.value = pay.payment_intent
 
 // Save the changes to the sheet
         await firstSheet.saveUpdatedCells();
