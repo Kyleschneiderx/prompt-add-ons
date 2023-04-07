@@ -76,6 +76,11 @@ cron.schedule('30 12,18 * * *', async () => {
             await firstSheet.loadCells();
             const cell = await firstSheet.getCell(number.index+1, 3)
             cell.value = "Yes";
+
+            const today = moment();
+            const formattedDate = today.format('MM/DD/YY');
+            const date = await firstSheet.getCell(number.index+1, 7)
+            date.value = formattedDate
     
     // Save the changes to the sheet
             await firstSheet.saveUpdatedCells();
@@ -132,6 +137,11 @@ app.route('/patient')
 
         const payId = await firstSheet.getCell(req.body.index+1, 6)
         payId.value = pay.payment_intent
+
+        const today = moment();
+        const formattedDate = today.format('MM/DD/YY');
+        const date = await firstSheet.getCell(number.index+1, 7)
+        date.value = formattedDate
 
 // Save the changes to the sheet
         await firstSheet.saveUpdatedCells();
@@ -263,11 +273,19 @@ app.route('/text')
             await firstSheet.loadCells();
             const cell = await firstSheet.getCell(number.index+1, 3)
             cell.value = "Yes";
+
+            const today = moment();
+            const formattedDate = today.format('MM/DD/YY');
+            const date = await firstSheet.getCell(number.index+1, 7)
+            date.value = formattedDate
     
     // Save the changes to the sheet
             await firstSheet.saveUpdatedCells();
 
         });
+
+        res.status(200).send("Success")
+
     }
     catch(err){
         console.log(err)
