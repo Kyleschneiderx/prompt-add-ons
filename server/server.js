@@ -64,7 +64,7 @@ cron.schedule('30 12,18 * * *', async () => {
             client
             .messages
             .create({
-                body: `Hi ${number.name.split(' ')[0]},\nThis is friendly reminder from Lake City PT letting you know you have an balance. If you'd like to make a payment please use the link below.\n https://app.lakecitypt.com/${link}`,
+                body: `Hi ${number.name.split(' ')[0]},\nThis is friendly reminder from Lake City PT letting you know you have a balance. If you'd like to make a payment or check your balance, please use the link below.\n https://app.lakecitypt.com/${link}`,
                 from: process.env.TWILIONUMBER,
                 to: number.number})
             .then(message => {
@@ -261,7 +261,7 @@ app.route('/text')
             client
             .messages
             .create({
-                body: `Hi ${number.name.split(' ')[0]},\nThis is friendly reminder from Lake City PT letting you know you have an balance. If you'd like to make a payment please use the link below.\n https://app.lakecitypt.com/${link}`,
+                body: `Hi ${number.name.split(' ')[0]},\nThis is friendly reminder from Lake City PT letting you know you have a balance. If you'd like to make a payment or check your balance, please use the link below.\n https://app.lakecitypt.com/${link}`,
                 from: process.env.TWILIONUMBER,
                 to: number.number})
             .then(message => {
