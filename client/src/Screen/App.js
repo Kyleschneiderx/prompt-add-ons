@@ -85,10 +85,10 @@ function App(){
 
   const handleAmountChange = (event) => {
     const newAmount = Math.abs(event.target.value)
-    if (newAmount <= parseFloat(amount.split("$")[1])) {
+    if (newAmount <= parseFloat(amount)) {
       setPay(newAmount);
     } else {
-      setPay(parseFloat(amount.split("$")[1]));
+      setPay(parseFloat(amount));
     }
   };
 
