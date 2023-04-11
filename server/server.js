@@ -132,7 +132,7 @@ app.route('/patient')
         await doc.loadInfo(); // loads document properties and worksheets
         const firstSheet = await doc.sheetsByIndex[0]
         await firstSheet.loadCells();
-        
+
         const cell = await firstSheet.getCell(req.body.index+1, 4)
         cell.value = "Yes";
 
