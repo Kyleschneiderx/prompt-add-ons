@@ -120,8 +120,8 @@ app.route('/patient')
     try{
         const cust = await createCustomer(req.body.name, req.body.id)
         const pay = await createPaymentLink(cust, amountInCents, 'usd')
-        // console.log(pay.id)
-        // console.log(pay.url)
+        console.log(pay.payment_intent)
+        console.log(pay.url)
         res.status(200).send(pay.url)
 
         await doc.useServiceAccountAuth({
@@ -132,6 +132,7 @@ app.route('/patient')
         await doc.loadInfo(); // loads document properties and worksheets
         const firstSheet = await doc.sheetsByIndex[0]
         await firstSheet.loadCells();
+        
         const cell = await firstSheet.getCell(req.body.index+1, 4)
         cell.value = "Yes";
 
@@ -140,7 +141,7 @@ app.route('/patient')
 
         const today = moment();
         const formattedDate = today.format('MM/DD/YY');
-        const date = await firstSheet.getCell(number.index+1, 7)
+        const date = await firstSheet.getCell(req.body.index+1, 7)
         date.value = formattedDate
 
 // Save the changes to the sheet
