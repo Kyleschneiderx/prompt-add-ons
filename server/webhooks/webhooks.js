@@ -73,7 +73,6 @@ router.route('/')
 
             } catch(err) {
                 console.error(err);
-                next(err);
             }
 
             break;
