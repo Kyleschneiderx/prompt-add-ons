@@ -14,13 +14,15 @@ const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID);
 const endpointSecret = process.env.STRIPE_ENDPOINT_SECRET;
 
 
+express.raw({type: "*/*"})
+
 router.route('/')
-.post(express.raw({ type: 'application/json' }), async (req, res) => {
+.post(async (req, res) => {
     const signature = req.headers['stripe-signature'];
   
     let event;
     try {
-      event = stripe.webhooks.constructEvent(req.body, signature, endpointSecret);
+      event = stripe.webhooks.constructEvent(req.rawBody, signature, endpointSecret);
     } catch (err) {
       console.error('Error verifying webhook signature', err);
       return res.sendStatus(400);
@@ -53,16 +55,20 @@ router.route('/')
                     i++;
                 }
 
-                await firstSheet.loadCells();
-                const paidAmount = await firstSheet.getCell(chekc[0].index+1, 9)
-                paidAmount.value = chekc[0].paid;
-    
-                const out = await firstSheet.getCell(chekc[0].index+1, 2)
-                const newTotal = chekc[0].owed - chekc[0].paid
-                out.value = newTotal
+                console.log(chekc)
+
+                if(chekc.length !== 0){
+                    await firstSheet.loadCells();
+                    const paidAmount = await firstSheet.getCell(chekc[0].index+1, 9)
+                    paidAmount.value = chekc[0].paid;
         
-        // Save the changes to the sheet
-                await firstSheet.saveUpdatedCells();
+                    const out = await firstSheet.getCell(chekc[0].index+1, 2)
+                    const newTotal = chekc[0].owed - chekc[0].paid
+                    out.value = newTotal
+            
+            // Save the changes to the sheet
+                    await firstSheet.saveUpdatedCells();
+                }
 
 
 
@@ -70,7 +76,6 @@ router.route('/')
 
             } catch(err) {
                 console.error(err);
-                next(err);
             }
 
             break;

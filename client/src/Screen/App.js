@@ -58,21 +58,19 @@ function App(){
 
   const clickQP = async (owed)=>{
     console.log(name, owed)
+    setLoading(true)
     try{
       const stripe = await axios.post('/patient', {index: index  ,name: name, amount: owed})
-      console.log(stripe)
       window.location.href = stripe.data
     }catch(err){
       console.log(err)
     }
 
-
-
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    setLoading(true)
     try{
       const stripe = await axios.post('/patient', {name: name, amount: pay})
       console.log(stripe)
@@ -80,6 +78,7 @@ function App(){
     }catch(err){
       console.log(err)
     }
+
     // submit the form data to your API or backend server here
   };
 
