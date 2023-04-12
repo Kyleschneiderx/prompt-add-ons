@@ -26,6 +26,9 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 
 const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID);
 
+const webhooks = require('./webhooks/webhooks')
+
+
 cron.schedule('30 12,18 * * *', async () => {
     console.log('Running the tasks at 12:30pm and 6:30pm every day');
     // add your task code here
@@ -94,8 +97,9 @@ cron.schedule('30 12,18 * * *', async () => {
 
 app.use(cors());
 
+app.use(express.raw({type: "*/*"})) 
 app.use(express.json({
-    type: ['application/json', 'text/plain']
+    type: ['application/json', 'text/plain'],
 }));
 
 
@@ -122,6 +126,7 @@ app.route('/patient')
         const pay = await createPaymentLink(cust, amountInCents, 'usd')
         console.log(pay.payment_intent)
         console.log(pay.url)
+        console.log(pay.id)
         res.status(200).send(pay.url)
 
         await doc.useServiceAccountAuth({
@@ -143,6 +148,9 @@ app.route('/patient')
         const formattedDate = today.format('MM/DD/YY');
         const date = await firstSheet.getCell(req.body.index+1, 7)
         date.value = formattedDate
+
+        const checkId = await firstSheet.getCell(req.body.index+1, 8)
+        checkId.value = pay.id
 
 // Save the changes to the sheet
         await firstSheet.saveUpdatedCells();
@@ -292,7 +300,14 @@ app.route('/text')
         console.log(err)
     }
 
+
 })
+
+
+
+
+
+app.use('/api/webhooks', webhooks);
 
 app.use(express.static('client/build'));
 
