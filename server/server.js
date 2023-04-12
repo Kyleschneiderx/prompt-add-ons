@@ -97,7 +97,7 @@ cron.schedule('30 12,18 * * *', async () => {
 
 app.use(cors());
 
-app.use(express.raw({type: "*/*"})) 
+// app.use(express.raw({type: "*/*"})) 
 app.use(express.json({
     type: ['application/json', 'text/plain'],
 }));
