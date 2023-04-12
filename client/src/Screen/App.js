@@ -57,11 +57,15 @@ function App(){
   }, []);
 
   const clickQP = async (owed)=>{
-    console.log(name, owed)
+    // console.log(name, owed)
+
+    
+
     try{
       const stripe = await axios.post('/patient', {index: index  ,name: name, amount: owed})
       console.log(stripe)
       window.location.href = stripe.data
+      // setLoading(true)
     }catch(err){
       console.log(err)
     }
@@ -73,10 +77,13 @@ function App(){
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    
+
     try{
       const stripe = await axios.post('/patient', {name: name, amount: pay})
       console.log(stripe)
       window.location.href = stripe.data
+      // setLoading(true)
     }catch(err){
       console.log(err)
     }
