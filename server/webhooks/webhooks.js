@@ -14,7 +14,6 @@ const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID);
 const endpointSecret = process.env.STRIPE_ENDPOINT_SECRET;
 
 
-express.raw({type: "*/*"})
 
 router.route('/')
 .post(async (req, res) => {

@@ -29,8 +29,8 @@ const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID);
 const webhooks = require('./webhooks/webhooks')
 
 
-cron.schedule('30 12,18 * * *', async () => {
-    console.log('Running the tasks at 12:30pm and 6:30pm every day');
+cron.schedule('0 9,12,18 * * *', async () => {
+    console.log('Running the tasks at 9am, 12:30pm and 6:30pm every day');
     // add your task code here
     try{
 
