@@ -58,7 +58,7 @@ cron.schedule('0 9,12,18 * * *', async () => {
 
         }
 
-        const selectedNumbers = chekc.slice(0, 5); // Send message to first 5 numbers in the list
+        const selectedNumbers = chekc.slice(0, 10); // Send message to first 5 numbers in the list
 
         selectedNumbers.forEach(async number => {
             console.log(number.id)
