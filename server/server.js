@@ -27,7 +27,7 @@ const { GoogleSpreadsheet } = require('google-spreadsheet');
 const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID);
 
 const webhooks = require('./webhooks/webhooks')
-
+const pdf = require('./routes/pdf')
 
 cron.schedule('30 12,18 * * *', async () => {
     console.log('Running the tasks at 12:30pm and 6:30pm every day');
@@ -310,6 +310,7 @@ app.route('/text')
 
 
 app.use('/api/webhooks', webhooks);
+app.use('/api/pdfs',pdf);
 
 app.use(express.static('client/build'));
 
